@@ -1,50 +1,53 @@
 import { useNavigate } from "react-router-dom"
 
-import { useAuth }
-from "../context/AuthContext"
-
 function Navbar() {
 
     const navigate = useNavigate()
 
-    const { user, logout }
-        = useAuth()
-
     const handleLogout = () => {
 
-        logout()
+        localStorage.removeItem("token")
 
         navigate("/")
     }
 
     return (
 
-        <div>
+        <nav className="
+            flex
+            justify-between
+            items-center
+            px-8
+            py-5
+            border-b
+            border-gray-800
+            bg-[#0F172A]
+        ">
 
-            <h2>
+            <h1 className="
+                text-2xl
+                font-bold
+                text-white
+            ">
                 AI Career OS
-            </h2>
+            </h1>
 
-            {
-                user && (
+            <button
+                onClick={handleLogout}
+                className="
+                    bg-red-600
+                    hover:bg-red-700
+                    transition
+                    px-5
+                    py-2
+                    rounded-xl
+                    text-white
+                "
+            >
+                Logout
+            </button>
 
-                    <div>
-
-                        <span>
-                            {user.username}
-                        </span>
-
-                        <button
-                            onClick={handleLogout}
-                        >
-                            Logout
-                        </button>
-
-                    </div>
-                )
-            }
-
-        </div>
+        </nav>
     )
 }
 
